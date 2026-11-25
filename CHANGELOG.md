@@ -14,6 +14,8 @@ Core SQLAlchemy/database semantics and PATCH compatibility remain protected.
 
 ## [Unreleased]
 
+## [1.12.5] - 2026-11-25
+
 ### Upgrade notes
 
 - **SQLAlchemy 2.0.53 or later required** — the dependency floor rises from `sqlalchemy>=2.0` to `sqlalchemy>=2.0.53` (still `<2.2`), the oldest release CI tests, because some earlier 2.0 releases cannot import the dialect; projects pinned to SQLAlchemy 2.0.0–2.0.52 must upgrade ([#1428](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1428), [#1434](https://github.com/cubrid-lab/sqlalchemy-cubrid/pull/1434)) by @yeongseon.
@@ -31,6 +33,8 @@ Core SQLAlchemy/database semantics and PATCH compatibility remain protected.
 - **Async sample** — `samples/async_basic.py` now disposes its async engine in a `finally`, so an error while connecting, inserting or cleaning up no longer skips `engine.dispose()` ([#1381](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1381), [#1387](https://github.com/cubrid-lab/sqlalchemy-cubrid/pull/1387)) by @Dio77799 (first contribution 🎉).
 - **Basic engine sample** — importing `samples/create_engine.py` no longer opens a database connection; the query runs in `main()` and `engine.dispose()` runs in a `finally` even when the query fails ([#1380](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1380), [#1388](https://github.com/cubrid-lab/sqlalchemy-cubrid/pull/1388)) by @Dio77799.
 
+* **compiler:** pass CubridIdentifierPreparer arguments to SQLAlchemy by keyword ([#1431](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1431)) ([303b812](https://github.com/cubrid-lab/sqlalchemy-cubrid/commit/303b8126ea0cb5f5984ea40f73252b922be14ef4)), refs [#1425](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1425) by @yeongseon
+
 ### Performance
 
 - **Reflection reuses table DDL** — one SQLAlchemy Inspector now reads `SHOW CREATE TABLE` once per table for column defaults, foreign keys and the unique-constraint fallback; `Inspector.clear_cache()` refreshes it ([#1396](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1396), [#1400](https://github.com/cubrid-lab/sqlalchemy-cubrid/pull/1400)) by @imshah-id (first contribution 🎉).
@@ -45,6 +49,12 @@ Core SQLAlchemy/database semantics and PATCH compatibility remain protected.
 - **Async example warning** — the `samples/async_basic.py` docstring now warns that the example drops and recreates `async_sample_users`, so it should run only against a disposable database ([#1371](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1371), [#1404](https://github.com/cubrid-lab/sqlalchemy-cubrid/pull/1404)) by @Hanshal-aether (first contribution 🎉).
 - **Commit type and release version** — CONTRIBUTING.md explains that `feat` asks for a MINOR release and `fix`, `perf` and `docs` for a PATCH, and that changes confined to `samples/` or contributor tooling do not use `feat` ([#1415](https://github.com/cubrid-lab/sqlalchemy-cubrid/pull/1415)) by @yeongseon.
 - **DML example SQL** — docs/DML_EXTENSIONS.md notes that its SQL examples show values inline for readability, while SQLAlchemy sends them as bound parameters ([#1370](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1370), [#1416](https://github.com/cubrid-lab/sqlalchemy-cubrid/pull/1416)) by @Kareenashinde15.
+
+* add MCP server to first contribution list ([#1424](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1424)) ([f978c85](https://github.com/cubrid-lab/sqlalchemy-cubrid/commit/f978c8566d50f412243ac2c36c98d30c8a7228a3)) by @Kareenashinde15
+* **changelog:** curate the unreleased contributor tooling and docs entries ([#1408](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1408)) ([ae732e2](https://github.com/cubrid-lab/sqlalchemy-cubrid/commit/ae732e253825cdae442250dd85ce874c8ec6e435)) by @yeongseon
+* correct the multi-table UPDATE note in the feature support page ([#1432](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1432)) ([3ee6802](https://github.com/cubrid-lab/sqlalchemy-cubrid/commit/3ee6802bdeddf690d7788f1034c0ec0b1074239e)), refs [#1426](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1426) by @yeongseon
+* **review:** align approval and change-request outcomes ([2261a4e](https://github.com/cubrid-lab/sqlalchemy-cubrid/commit/2261a4eaeb4baf70a12f7f5d269e792dec3281fb)), refs [#1411](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1411) by @yeongseon
+* use pycubrid driver in pooling example ([#1439](https://github.com/cubrid-lab/sqlalchemy-cubrid/issues/1439)) ([a6f8da2](https://github.com/cubrid-lab/sqlalchemy-cubrid/commit/a6f8da23869e59cbf14ced20105257f221811854)) by @Kareenashinde15
 
 ### CI
 
